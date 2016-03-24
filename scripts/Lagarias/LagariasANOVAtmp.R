@@ -63,7 +63,10 @@ head(myData)
 Model.lm <- lm(RPKM.t~ PathwayID + GenotypeID + Time)
 #big model
 Model.lm <- lm(RPKM.t~ PathwayID/GeneIDV5.5 + GenotypeID + Time )
-Model.aov <- lm(RPKM.t~ PathwayID/GeneIDV5.5 + GenotypeID + Time )
+Model.aov <- aov(RPKM.t~ PathwayID/GeneIDV5.5 + GenotypeID + Time )
+#aov(Y ~ A + B %in% A, data=d)
+#aov(Y ~ A/B, data=d)
+#aov(Y ~ A + A:B, data=d)
 MY.ANOVA <- anova(Model.lm)
 summary(MY.ANOVA)
 MY.ANOVA #sig fx of genotype and time
@@ -74,8 +77,4 @@ summary(MY.aov)
 
 #adjusted p-values give 6 sig. pairs and 1 marg. sig.
 TukeyHSD(MY.aov)
-
-
-
-
 
