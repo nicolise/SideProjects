@@ -1,0 +1,15 @@
+[1] "2016-04-04 15:50:16 PDT"
+[1] "CiBi5_2_8b.JPG"
+[1] "DEBUG 2016-04-04 15:50:17 : row  1 ,  label  1 , Object  1"
+[1] "DEBUG 2016-04-04 15:50:17 : row  2 ,  label  2 , Object  2"
+[1] "DEBUG 2016-04-04 15:50:18 : row  3 ,  label  4 , Object  4"
+[1] "DEBUG 2016-04-04 15:50:18 : row  4 ,  label  5 , Object  5"
+[1] "DEBUG 2016-04-04 15:50:18 : row  5 ,  label  6 , Object  6"
+[1] "DEBUG 2016-04-04 15:50:18 : row  6 ,  label  7 , Object  7"
+[1] "DEBUG 2016-04-04 15:50:19 : row  7 ,  label  8 , Object  8"
+[1] "DEBUG 2016-04-04 15:50:19 : row  8 ,  label  9 , Object  9"
+[1] "DEBUG 2016-04-04 15:50:19 : row  9 ,  label  10 , Object  10"
+[1] "DEBUG 2016-04-04 15:50:19 : row  10 ,  label  11 , Object  11"
+[1] "DEBUG 2016-04-04 15:50:20 : row  11 ,  label  12 , Object  12"
+Error in eval(expr, envir, enclos) : 
+  only 0's may be mixed with negative subscripts

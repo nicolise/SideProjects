@@ -67,7 +67,7 @@ Model.lm <- aov(RPKM.t ~ PathwayID/GeneIDV55)
 set.seed(100)
 sample.mini <- sample( 1:nrow(myData) , size=1e3 , replace=TRUE )
 df.mini <- myData[sample.mini,]
-minimod.lm <- lm(RPKM.t ~ PathwayID/GeneIDV55, data=)
+minimod.lm <- lm(RPKM.t ~ PathwayID/GeneIDV55, data=df.mini)
 
 #try running within each pathway
 out <- split( myData , f = myData$PathwayID )
@@ -96,39 +96,3 @@ summary(MY.aov)
 
 #adjusted p-values give 6 sig. pairs and 1 marg. sig.
 TukeyHSD(MY.aov)
-
-#try running with subset time points:
-#A) just 0.5 and 4 hour
-#B) just 0 and 4 hour
-#try running within each pathway
-head(myData)
-myDataA <- subset(myData, Time==c(0.5, 4.0))
-myDataB <- subset(myData, Time==c(0.0, 4.0))
-
-outA <- split( myDataA , f = myDataA$PathwayID )
-head(outA[[1]]) #30 elements
-
-outB <- split( myDataB , f = myDataB$PathwayID )
-head(outB[[1]]) #30 elements
-
-#Using a for loop, iterate over the list of data frames in out[[]]
-sink(file='ModelsBYpath_bytime_032916B.txt')
-#skip 13: blank, 59: 94.1, 68: blank, 77: Gallo3, 99: blank
-out <- outA
-print(unique(out$Time))
-for (i in c(1:30)) {
-  print(unique(out[[i]]$PathwayID))
-  Mod <- lm(RPKM.t ~ GeneIDV55 + GenotypeID + Time + GeneIDV55:GenotypeID + GeneIDV55:Time + GenotypeID:Time, data=out[[i]])
-  result <- anova(Mod)
-  print(result)
-}
-
-out <- outB
-print(unique(out$Time))
-for (i in c(1:30)) {
-  print(unique(out[[i]]$PathwayID))
-  Mod <- lm(RPKM.t ~ GeneIDV55 + GenotypeID + Time + GeneIDV55:GenotypeID + GeneIDV55:Time + GenotypeID:Time, data=out[[i]])
-  result <- anova(Mod)
-  print(result)
-}
-sink()

@@ -1,0 +1,115 @@
+#the full results with error information
+
+> fullmodA <- lmer(Scale.LS ~ IsolateID + Domestication + Domestication/PlantID + (1|Exp) + (1|Exp/Rep) + (1|Exp/Rep/ImageName) + (1|Exp/Rep/PnumID) , data = ModDat)
+fixed-effect model matrix is rank deficient so dropping 12 columns / coefficients
+Warning message:
+In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+> 
+> fullmodB <- lmer(Scale.LS ~ IsolateID + Domestication + Domestication/PlantID + IsolateID:Domestication + IsolateID:Domestication/PlantID + (1|Exp) + (1|Exp/Rep) + (1|Exp/Rep/ImageName) + (1|Exp/Rep/PnumID) , data = ModDat)
+fixed-effect model matrix is rank deficient so dropping 1176 columns / coefficients
+Warning messages:
+1: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  unable to evaluate scaled gradient
+2: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge: degenerate  Hessian with 2 negative eigenvalues
+> 
+> anova(fullmodA)
+fixed-effect model matrix is rank deficient so dropping 12 columns / coefficients
+fixed-effect model matrix is rank deficient so dropping 12 columns / coefficients
+Model is not identifiable...
+anova from lme4 is returned
+some computational error has occurred in lmerTest
+Analysis of Variance Table
+                      Df  Sum Sq Mean Sq F value
+IsolateID             97 222.349  2.2923  18.053
+Domestication          1  12.903 12.9025 101.615
+Domestication:PlantID 10  83.633  8.3633  65.866
+Warning messages:
+1: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  unable to evaluate scaled gradient
+2: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+> rand(fullmodA)
+fixed-effect model matrix is rank deficient so dropping 12 columns / coefficients
+fixed-effect model matrix is rank deficient so dropping 12 columns / coefficients
+fixed-effect model matrix is rank deficient so dropping 12 columns / coefficients
+fixed-effect model matrix is rank deficient so dropping 12 columns / coefficients
+Analysis of Random effects Table:
+                    Chi.sq Chi.DF p.value    
+Exp               9.00e-11      1       1    
+Exp/Rep           0.00e+00      2       1    
+Exp/Rep/ImageName 3.69e+02      3  <2e-16 ***
+Exp/Rep/PnumID    1.39e+02      3  <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Warning messages:
+1: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  unable to evaluate scaled gradient
+2: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge: degenerate  Hessian with 2 negative eigenvalues
+3: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+> 
+> anova(fullmodB)
+fixed-effect model matrix is rank deficient so dropping 1176 columns / coefficients
+fixed-effect model matrix is rank deficient so dropping 1176 columns / coefficients
+Model is not identifiable...
+anova from lme4 is returned
+some computational error has occurred in lmerTest
+Analysis of Variance Table
+                                 Df  Sum Sq Mean Sq F value
+IsolateID                        97 222.383  2.2926 17.7480
+Domestication                     1  12.902 12.9022 99.8809
+Domestication:PlantID            10  83.636  8.3636 64.7461
+IsolateID:Domestication          97   9.978  0.1029  0.7963
+IsolateID:Domestication:PlantID 970 113.327  0.1168  0.9044
+Warning messages:
+1: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  unable to evaluate scaled gradient
+2: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge: degenerate  Hessian with 3 negative eigenvalues
+> rand(fullmodB)
+fixed-effect model matrix is rank deficient so dropping 1176 columns / coefficients
+fixed-effect model matrix is rank deficient so dropping 1176 columns / coefficients
+Warning messages:
+1: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  unable to evaluate scaled gradient
+2: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge: degenerate  Hessian with 3 negative eigenvalues
+fixed-effect model matrix is rank deficient so dropping 1176 columns / coefficients
+fixed-effect model matrix is rank deficient so dropping 1176 columns / coefficients
+Analysis of Random effects Table:
+                    Chi.sq Chi.DF p.value    
+Exp               4.00e-11      1       1    
+Exp/Rep           0.00e+00      2       1    
+Exp/Rep/ImageName 3.06e+02      3  <2e-16 ***
+Exp/Rep/PnumID    1.35e+02      3  <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Warning messages:
+1: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  unable to evaluate scaled gradient
+2: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+3: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+> 
+> anova(fullmodA, fullmodB)
+refitting model(s) with ML (instead of REML)
+Data: ModDat
+Models:
+object: Scale.LS ~ IsolateID + Domestication + Domestication/PlantID + 
+object:     (1 | Exp) + (1 | Exp/Rep) + (1 | Exp/Rep/ImageName) + (1 | 
+object:     Exp/Rep/PnumID)
+..1: Scale.LS ~ IsolateID + Domestication + Domestication/PlantID + 
+..1:     IsolateID:Domestication + IsolateID:Domestication/PlantID + 
+..1:     (1 | Exp) + (1 | Exp/Rep) + (1 | Exp/Rep/ImageName) + (1 | 
+..1:     Exp/Rep/PnumID)
+         Df    AIC     BIC  logLik deviance  Chisq Chi Df Pr(>Chisq)
+object  119 5778.9  6591.4 -2770.5   5540.9                         
+..1    1186 6845.2 14943.0 -2236.6   4473.2 1067.7   1067     0.4883
+> 
