@@ -1,12 +1,12 @@
 rm(list=ls())
-setwd("~/Projects/SideProjects/data/labInterns")
-myDataX <- read.csv("BR_selectMedia_0407.csv")
+setwd("~/Documents/GitRepos/SideProjects/data/LabIntern")
+myDataX <- read.csv("BR_selectMedia_0509.csv")
 myData <- read.csv("BR_Hyphae_imagedata.csv")
 
 names(myData)
 
 #add a new variable for our digital estimate of waviness
-myData$DigWave <- myData$TimesCrossing / myData$Length
+myData$DigWave <- myData$Crossing / myData$Length
 #standardize it
 myData$DigWave.s <- (myData$DigWave - mean(myData$DigWave))/sd(myData$DigWave)
 myData$DigWave.sp <- myData$DigWave.s+2
@@ -28,10 +28,6 @@ ggplot(myFigDat, aes(x = factor(Isolate), y = mean))+
   theme(text = element_text(size=24), axis.text.x = element_text(angle = 45, hjust = 1))+
 labs(y=expression(Mean ~ Wavy ~ Index), x=element_blank())+
   geom_errorbar(limits, width=0.25)
-#from here is for plots with media concentration only
-+
-  facet_grid(.~Date, scales="free")+ 
-  scale_y_continuous(limits = c(0,4.2)) 
 
 
 #compare to manual scale
@@ -42,5 +38,10 @@ dnew <- data.frame( Isolate=IsolateNm , ManuMean=ManMean , DigiMean=DigMean )
 plot(dnew$ManuMean, dnew$DigiMean)
 m0 <- lm( DigiMean ~ ManuMean, dnew )
 abline( m0  )
+
+theme_set(theme_bw(base_size = 18))
+p <- ggplot(dnew, aes(ManuMean, DigiMean))
+p + geom_point(colour="#00B6EB", size=5) + geom_smooth(method=lm) + 
+  labs(x="Manual Mean Waviness", y="Digital Mean Waviness")
 
 1 - var(resid(m0))/var(dnew$DigiMean)
