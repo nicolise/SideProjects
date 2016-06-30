@@ -1,0 +1,12 @@
+here is an working example that you can play with.
+
+1. open wei.Rproj with R Studio
+2. open file Octopus.R
+3. run all lines
+
+Notes:
+function octopus.glm.nb.all() in file GlmNbAll.R packs the whole pipe line together.
+    1. sub function run.normalize() does TMM Normalization with edgeR
+    2. sub function  run_slice() calculate ANOVA for one gene
+    3. other codes are for performance optimizing, you don’t need to read that.
+
