@@ -3,9 +3,15 @@
 #ANOVA for Lagarias RNAseq
 
 #-------------------------------------------------------------------
+<<<<<<< HEAD
 rm(list=ls())
 setwd("~/Projects/SideProjects/data/Lagarias")
 myData <- read.csv("for_pathwayANOVAed.csv")
+=======
+#setwd("~/Projects/SideProjects/data/Lagarias")
+setwd("~/Documents/GitRepos/SideProjects/data")
+myData <- read.csv("for_pathwayANOVA.csv")
+>>>>>>> c997362e8882e243fc7afcc2220033c41fc0c7c4
 names(myData)
 
 #is data normal?
@@ -49,8 +55,17 @@ bartlett.test(RPKM.t ~ GenotypeID, data=myData) #meh not homoscedastic
 bartlett.test(RPKM.t ~ Time, data=myData) #also iffy
 leveneTest(RPKM.t~GenotypeID) #also not homoscedastic
 
+#check: balance by genotype?
+#perfect? 6330 obs per geno?
+as.data.frame(table(unique(myData[])$GenotypeID))
+
+#gpuR::gpuLm
+#gpux
+#gpud
+
 #go ahead with ANOVA anyway
 head(myData)
+<<<<<<< HEAD
 #30 pathways, 979 genes
 as.data.frame(table(unique(myData[])$GeneID)) 
 
@@ -86,6 +101,13 @@ sink()
 
 
 # more analysis
+=======
+#small model
+Model.lm <- lm(RPKM.t~ PathwayID + GenotypeID + Time)
+#big model
+Model.lm <- lm(RPKM.t~ PathwayID/GeneIDV5.5 + GenotypeID + Time )
+Model.aov <- lm(RPKM.t~ PathwayID/GeneIDV5.5 + GenotypeID + Time )
+>>>>>>> c997362e8882e243fc7afcc2220033c41fc0c7c4
 MY.ANOVA <- anova(Model.lm)
 summary(MY.ANOVA)
 MY.ANOVA #sig fx of genotype and time
@@ -97,6 +119,7 @@ summary(MY.aov)
 #adjusted p-values give 6 sig. pairs and 1 marg. sig.
 TukeyHSD(MY.aov)
 
+<<<<<<< HEAD
 #try running with subset time points:
 #A) just 0.5 and 4 hour
 #B) just 0 and 4 hour
@@ -104,6 +127,8 @@ TukeyHSD(MY.aov)
 head(myData)
 myDataA <- subset(myData, Time==c(0.5, 4.0))
 myDataB <- subset(myData, Time==c(0.0, 4.0))
+=======
+>>>>>>> c997362e8882e243fc7afcc2220033c41fc0c7c4
 
 outA <- split( myDataA , f = myDataA$PathwayID )
 head(outA[[1]]) #30 elements
